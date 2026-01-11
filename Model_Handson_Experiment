@@ -1,0 +1,9 @@
+Once the script is running, perform these "Performance Engineering" experiments to build the skills mentioned in the job post:
+
+Test Memory Limits: Increase the train_batch_size in the config until you get an Out of Memory (OOM) error. Then, change zero_optimization: stage from 2 to 3. Stage 3 "shards" the model weights across GPUs. Observe if you can now fit a larger batch.
+
+Monitor Throughput: Add a timer to your loop. Measure Tokens Per Second.
+
+Question: Does adding a second GPU double your speed? (Usually no, due to communication overhead).
+
+Implement Gradient Accumulation: If your GPU memory is small, set gradient_accumulation_steps: 4 in the config. This allows you to simulate a large batch size by doing 4 small passes before updating weights.
